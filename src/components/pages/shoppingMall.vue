@@ -3,13 +3,14 @@
     <div class="search-bar">
       <van-row class="test-row">
         <van-col span="3">
-          <img class="location-icon" :src="locationIcon" alt />
+          <div class="location-icon">          <img  :src="locationIcon" alt />
+</div>
         </van-col>
         <van-col span="16">
           <input type="text" class="search-input" />
         </van-col>
         <van-col span="5">
-          <van-button size="mini">搜索</van-button>
+          <van-button class="top-search-button"  size="mini">搜索</van-button>
         </van-col>
       </van-row>
     </div>
@@ -42,7 +43,7 @@
             <div class="recommend-item">
               <img :src="item.image" width="80%" alt />
               <div>{{item.goodsName}}</div>
-              <div>${{item.price}}(${{item.mallPrice}})</div>
+              <div>${{item.price | moneyFilter}}(${{item.mallPrice | moneyFilter}})</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -53,6 +54,20 @@
     <div v-for="(item,index) in floorName" :key="index">
       <floorComponent :floorData="floorContent[index]" :floorTitle="item"></floorComponent>
     </div>
+    <!-- 热卖推荐 -->
+    <div class="hot-area">
+      <div class="hot-title">热卖商品</div>
+      <div class="hot-goods">
+      <van-list>
+        <van-row gutter="20">
+          <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
+            <goods-info :goods="item"></goods-info>
+          </van-col>
+        </van-row>
+      </van-list>
+      </div>  
+    </div>
+
   </div>
 </template>
 
@@ -63,6 +78,8 @@ import { swiper, swiperSlide } from "vue-awesome-swiper"
 import swiperDefault from "../swiper/swiperdemo"
 import swiperText from "../swiper/swipertext"
 import floorComponent from "../component/floor"
+import {toMoney} from "@/filter/moneyFilter.js"
+import goodsInfo from "../component/goodsInfo"
 export default {
   name: "HelloWorld",
   data() {
@@ -90,15 +107,22 @@ export default {
       advertesPicture: "",
       recommendGoods: [],
       floorContent: {},
-      floorName:{}
-    };
+      floorName:{},
+      hotHoods:[], //热卖商品
+    }
+  },
+  filters:{
+    moneyFilter(money){
+      return toMoney(money)
+    }
   },
   components: {
     swiper,
     swiperSlide,
     swiperDefault,
     swiperText,
-    floorComponent
+    floorComponent,
+    goodsInfo
   },
   created() {
     axios({
@@ -115,6 +139,7 @@ export default {
           for(let key in this.floorName){
             this.floorContent[key] = response.data[key]
           }
+          this.hotGoods = response.data.hotGoods
         }
       })
       .catch(error => {
@@ -138,9 +163,15 @@ export default {
   /* border: 1px solid rgb(255,117,0); */
   border: none;
   border-radius: 2rem;
+  transform: translateY(.1rem);
 }
 .location-icon {
-  padding: 0.3rem 0 0.2rem 0.3rem;
+  transform: translate(.5rem, .4rem);
+}
+.top-search-button{
+  margin-left: .5rem;
+  background: none;
+  color:white;
 }
 .swiper-area {
   width: 100%;
@@ -188,5 +219,11 @@ export default {
   font-size: 12px;
   text-align: center;
 }
+.hot-area{
+      text-align: center;
+      font-size:14px;
+      height: 1.8rem;
+      line-height:1.8rem;
+  }
 
 </style>

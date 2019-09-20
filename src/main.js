@@ -6,9 +6,9 @@ import router from './router'
 import 'vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css'
 
 
-import { Button, Row, Col, Swipe, SwipeItem, lazyload } from 'vant'
+import { Button, Row, Col, Swipe, SwipeItem, lazyload, List } from 'vant'
 
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(lazyload);
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(lazyload).use(List);
 
 Vue.config.productionTip = false
 
