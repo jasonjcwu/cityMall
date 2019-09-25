@@ -80,6 +80,7 @@ import swiperText from "../swiper/swipertext"
 import floorComponent from "../component/floor"
 import {toMoney} from "@/filter/moneyFilter.js"
 import goodsInfo from "../component/goodsInfo"
+import url from "@/serviceAPI.config.js"
 export default {
   name: "HelloWorld",
   data() {
@@ -108,7 +109,7 @@ export default {
       recommendGoods: [],
       floorContent: {},
       floorName:{},
-      hotHoods:[], //热卖商品
+      hotGoods:[], //热卖商品
     }
   },
   filters:{
@@ -126,7 +127,7 @@ export default {
   },
   created() {
     axios({
-      url: "http://localhost:3001/data",
+      url: url.getShoppingMallInfo,
       method: "get"
     })
       .then(response => {
