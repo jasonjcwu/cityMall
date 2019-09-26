@@ -3,9 +3,12 @@ const app = new Koa()
 const { connect, initSchemas } = require('./database/init.js')
 const mongoose = require('mongoose')
 const Router = require('koa-router')
+const bodyParser = require('koa-bodyparser')
 let user = require('./appApi/user')
-
-//装载路由
+const cors = require('koa2-cors')
+app.use(cors())
+app.use(bodyParser())
+    //装载路由
 let router = new Router()
 router.use('/user', user.routes())
 
