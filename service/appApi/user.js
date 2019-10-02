@@ -5,7 +5,9 @@ router.get('/', async(ctx) => {
     ctx.body = "这是用户操作首页"
 })
 router.post('/register', async(ctx) => {
-    const User = mongoose.model('user')
+    console.log(ctx.request.body)
+        //ctx.body = ctx.request.body
+    const User = mongoose.model('User')
     let newUser = new User(ctx.request.body)
     await newUser.save().then(() => {
         ctx.body = {
@@ -19,4 +21,4 @@ router.post('/register', async(ctx) => {
         }
     })
 })
-module.exports = router;
+module.exports = router
