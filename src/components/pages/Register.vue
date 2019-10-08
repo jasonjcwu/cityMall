@@ -9,12 +9,20 @@
         icon="clear"
         placeholder="请输入用户名"
         required
-        @click-icon="username = ''"
+        @click-icon="username = ''" 
+        :error-message="usernameErrorMsg"
       />
 
-      <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required />
+      <van-field 
+      v-model="password" 
+      type="password" 
+      label="密码" 
+      placeholder="请输入密码" 
+      required 
+      :error-message="passwordErrorMsg"
+      />
       <div class="register-button">
-        <van-button type="primary" @click="axiosRegisterUser" size="large">注册</van-button>
+        <van-button type="primary" @click="registerAction" :loading="openLoading" size="large">注册</van-button>
       </div>
     </div>
   </div>
@@ -28,14 +36,21 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      openLoading: false,    //是否开启用户的Loading
+      usernameErrorMsg:'',   //当用户名出现错误的时候
+      passwordErrorMsg:'',   //当密码出现错误的时候
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
+    registerAction(){
+      this.checkForm() && this.axiosRegisterUser()
+    },
     axiosRegisterUser() {
+      this.openLoading=true;
       this.$axios.post(url.registerUser,
         {
           userName: this.username,
@@ -43,19 +58,41 @@ export default {
         }
       )
         .then(response => {
-          console.log(response);
           if (response.data.code == 200) {
-            Toast.success("注册成功");
+            Toast.success("注册成功")
+            this.$router.push('/')
           } else {
-            console.log(response.data.message);
-            Toast.fail("注册失败");
+            console.log(response.data.message)
+            Toast.fail("注册失败")
+            this.openLoading=false
           }
-          console.log(response.data.code);
+          //console.log(response.data.code)
         })
         .catch(error => {
-          Toast.fail("注册失败");
-        });
+          Toast.fail("注册失败")
+          this.openLoading=false
+        })
+    },
+    checkForm(){
+    let isOk= true
+    if(this.username.length<5||this.username.length>20){
+      console.log(this.username)
+        this.usernameErrorMsg="用户名不能小于5位或大于20位"
+        isOk= false
+    }else{
+      console.log('taoguo')
+      console.log(this.username.length)
+      
+        this.usernameErrorMsg=''
     }
+    if(this.password.length<6||this.password.length>20){
+        this.passwordErrorMsg="密码不能少于6位或多于20位"
+        isOk= false
+    }else{
+        this.passwordErrorMsg=''
+    }
+    return isOk
+}
   }
 };
 </script>
