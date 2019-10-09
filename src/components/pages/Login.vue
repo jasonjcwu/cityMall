@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="用户注册" left-text="返回" left-arrow @click-left="goBack" />
+    <van-nav-bar title="用户登陆" left-text="返回" left-arrow @click-left="goBack" />
 
     <div class="register-panel">
       <van-field
@@ -22,7 +22,7 @@
         :error-message="passwordErrorMsg"
       />
       <div class="register-button">
-        <van-button type="primary" @click="registerAction" :loading="openLoading" size="large">注册</van-button>
+        <van-button type="primary" @click="LoginAction" :loading="openLoading" size="large">登陆</van-button>
       </div>
     </div>
   </div>
@@ -42,33 +42,51 @@ export default {
       passwordErrorMsg: "" //当密码出现错误的时候
     };
   },
+  created(){
+    if(localStorage.userInfo){
+      Toast.success('已经登陆')
+      this.$router.push('/')
+    }
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
-    registerAction() {
-      this.checkForm() && this.axiosRegisterUser();
+    LoginAction() {
+      this.checkForm() && this.axiosLoginUser();
     },
-    axiosRegisterUser() {
+    axiosLoginUser() {
       this.openLoading = true;
       this.$axios
-        .post(url.registerUser, {
+        .post(url.login, {
           userName: this.username,
-          passWord: this.password
+          password: this.password
         })
         .then(response => {
-          if (response.data.code == 200) {
-            Toast.success("注册成功");
-            this.$router.push("/");
-          } else {
-            console.log(response.data.message);
-            Toast.fail("注册失败");
+          console.log(response);
+          if (response.data.code == 200 && response.data.message) {
+            new Promise((resolve, reject) => {
+              localStorage.userInfo = { userName: this.username };
+              setTimeout(() => {
+                resolve();
+              }, 500);
+            })
+              .then(() => {
+                Toast.success("登录成功");
+                this.$router.push("/");
+              })
+              .catch(err => {
+                Toast.fail("登陆状态保存失败");
+              });
+          } 
+          else {
+            Toast.fail("登录失败");
             this.openLoading = false;
           }
-          //console.log(response.data.code)
         })
         .catch(error => {
-          Toast.fail("注册失败");
+          console.log(error);
+          Toast.fail("登录失败");
           this.openLoading = false;
         });
     },
@@ -78,8 +96,6 @@ export default {
         this.usernameErrorMsg = "用户名不能小于5位或大于20位";
         isOk = false;
       } else {
-        console.log(this.username.length);
-
         this.usernameErrorMsg = "";
       }
       if (this.password.length < 6 || this.password.length > 20) {

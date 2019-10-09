@@ -1,8 +1,9 @@
 const BASEURL = "http://localhost:3001/"
-const LOACALURL = "http://localhost:3000/"
+const LOCALURL = "http://localhost:3000/"
 const URL = {
     //商城首页
     getShoppingMallInfo: BASEURL + 'data',
-    registerUser: LOACALURL + 'user/register'
+    registerUser: LOCALURL + 'user/register',
+    login: LOCALURL + 'user/login', //用户注册接口
 }
 module.exports = URL
