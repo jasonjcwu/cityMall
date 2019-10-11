@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 const bcrypt = require('bcryptjs')
 const SALT_WORK_FACTOR = 10
-
 //创建schema
 const userSchema = new Schema({
     UserId: ObjectId,

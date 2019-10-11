@@ -18,12 +18,13 @@ app.use(cors())
     // });
 
 let user = require('./appApi/user')
+let goods = require('./appApi/goods.js')
 
 
 //装载路由
 let router = new Router()
 router.use('/user', user.routes())
-
+router.use('/goods', goods.routes())
 //路由中间件
 app.use(router.routes())
 app.use(router.allowedMethods())
