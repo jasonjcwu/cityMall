@@ -21,7 +21,10 @@
         </van-col>
         <van-col span="18">
           <div class="tabCategorySub">
-            <van-tabs v-model="active" @click="onClickCategorySub">
+            <van-tabs
+              v-model="active"
+              @click="onClickCategorySub"
+            >
               <van-tab
                 v-for="(item, index) in categorySub"
                 :key="index"
@@ -43,6 +46,7 @@
               >
                 <div
                   class="list-item"
+                  @click="goGoodsInfo(item.ID)"
                   v-for="(item,index) in goodList"
                   :key="index"
                 >
@@ -52,8 +56,10 @@
                       :onerror="errorImg"
                     /></div>
                   <div class="list-item-text">
-                    <div class="list-item-name">{{item.NAME}}</div>
-                    <div>￥{{item.ORI_PRICE}}</div>
+                    <div class="list-item-name">
+                      <div>{{item.NAME}}</div>
+                      <div>￥{{item.ORI_PRICE | moneyFilter}}</div>
+                    </div>
                   </div>
                 </div>
               </van-list>
@@ -70,6 +76,7 @@
 import axios from 'axios'
 import url from '@/serviceAPI.config.js'
 import { Toast } from 'vant'
+import {toMoney} from '@/filter/moneyFilter.js'
 export default {
   data() {
     return {
@@ -84,7 +91,7 @@ export default {
       page: 1,          //商品列表的页数
       goodList: [],     //商品信息
       categorySubId: '', //商品子分类ID
-      errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
+      errorImg: 'this.src="' + require('@/assets/images/errorimg.png') + '"',
     }
   },
   created() {
@@ -96,9 +103,14 @@ export default {
   mounted() {
     let winHeight = document.documentElement.clientHeight
     document.getElementById("leftNav").style.height = winHeight - 46 + 'px'
-    document.getElementById('list-div').style.height = winHeight - 90 + 'px'
+    document.getElementById('list-div').style.height = winHeight - 150 + 'px'
 
   },
+  filters:{
+    moneyFilter(money){
+        return toMoney(money)
+    }  
+},
   methods: {
     getCategory() {
       axios({
@@ -151,7 +163,7 @@ export default {
     },
     onLoad() {
       setTimeout(() => {
-        this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].ID
+        this.categorySubId = this.categorySubId ? this.categorySubId : this.categorySub[0].ID
         this.getGoodList()
       }, 500)
     },
@@ -159,8 +171,8 @@ export default {
       setTimeout(() => {
         this.isRefresh = false
         this.finished = false
-        this.goodList=[]
-        this.page=1
+        this.goodList = []
+        this.page = 1
         this.onLoad()
       }, 500)
     },
@@ -200,7 +212,9 @@ export default {
       this.onLoad()
 
     },
-
+    goGoodsInfo(id) {
+      this.$router.push({ name: 'Goods', params: { goodsId: id } })
+    },
   }
 
 }
@@ -245,7 +259,7 @@ export default {
   margin-top: 10px;
   margin-left: 10px;
 }
-/*超出宽度省略号*/ 
+/*超出宽度省略号*/
 /* .list-item-name{
   overflow: hidden;
   white-space: nowrap;
