@@ -8,9 +8,55 @@ import 'vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css'
 import Axios from 'axios'
 
 
-import { Button, Row, Col, Swipe, SwipeItem, lazyload, List, Field, NavBar, Tab, Tabs, PullRefresh, Stepper, Tabbar, TabbarItem } from 'vant'
+import {
+    Button,
+    Row,
+    Col,
+    Swipe,
+    SwipeItem,
+    lazyload,
+    List,
+    Field,
+    NavBar,
+    Tab,
+    Tabs,
+    PullRefresh,
+    Stepper,
+    Tabbar,
+    TabbarItem,
+    GoodsAction,
+    GoodsActionButton,
+    GoodsActionIcon,
+    Sidebar,
+    SidebarItem,
+    Icon,
+    Cell,
+    CellGroup,
+} from 'vant'
 
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(lazyload).use(List).use(Field).use(NavBar).use(Tab).use(Tabs).use(PullRefresh).use(Stepper).use(Tabbar).use(TabbarItem)
+Vue.use(Button)
+    .use(Row)
+    .use(Col)
+    .use(Swipe)
+    .use(SwipeItem)
+    .use(lazyload)
+    .use(List)
+    .use(Field)
+    .use(NavBar)
+    .use(Tab)
+    .use(Tabs)
+    .use(PullRefresh)
+    .use(Stepper)
+    .use(Tabbar)
+    .use(TabbarItem)
+    .use(GoodsAction)
+    .use(GoodsActionIcon)
+    .use(GoodsActionButton)
+    .use(Sidebar)
+    .use(SidebarItem)
+    .use(Icon)
+    .use(Cell)
+    .use(CellGroup)
 
 Vue.config.productionTip = false
 

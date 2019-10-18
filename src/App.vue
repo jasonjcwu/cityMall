@@ -12,6 +12,7 @@ export default {
 
 <style>
 #app {
- background-color: rgba(240, 240, 240, 0);
+  background-color: #f8f8f8;
+  box-sizing: border-box;
 }
 </style>

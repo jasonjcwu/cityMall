@@ -37,24 +37,22 @@
       </van-tabs>
 
     </div>
-
-    <div class="goods-bottom">
-
-      <div>
-        <van-button
-          size="large"
-          type="primary"
-          @click="addGoodsToCart"
-        >加入购物车</van-button>
-      </div>
-      <div>
-        <van-button
-          size="large"
-          type="danger"
-        >直接购买</van-button>
-      </div>
-
-    </div>
+    <van-goods-action>
+            <van-goods-action-icon icon="chat-o" @click="sorry">
+        客服
+      </van-goods-action-icon>
+      <van-goods-action-icon icon="cart-o" @click="onClickCart">
+        购物车
+      </van-goods-action-icon>
+      <van-goods-action-button
+        type="warning"
+        @click="addGoodsToCart"
+      >加入购物车</van-goods-action-button>
+      <van-goods-action-button
+        type="danger"
+        @click="sorry"
+      >直接购买</van-goods-action-button>
+    </van-goods-action>
   </div>
 
 </template>
@@ -129,8 +127,13 @@ export default {
       } else {
         Toast.success('已有此商品')
       }
+    },
+    onClickCart(){
       this.$router.push({ name: 'Cart' })  //进行跳转
     },
+    sorry() {
+      Toast('暂无后续逻辑~');
+    }
   }
 }
 </script>
@@ -139,7 +142,7 @@ export default {
 .detail {
   font-size: 0px;
 }
-.goods-cell{
+.goods-cell {
   padding: 10px 16px;
 }
 .goods-name {
@@ -150,7 +153,7 @@ export default {
   background-color: #fff;
   color: #f44;
 }
-.goods-bottom {
+/* .goods-bottom {
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -163,5 +166,5 @@ export default {
 .goods-bottom > div {
   flex: 1;
   padding: 5px;
-}
+} */
 </style>

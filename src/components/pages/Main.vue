@@ -12,12 +12,9 @@
       @change="changeTabbar(active)"
     >
       <van-tabbar-item icon="shop">首页</van-tabbar-item>
-      <van-tabbar-item icon="records">列表页</van-tabbar-item>
-      <van-tabbar-item icon="cart">购物车页</van-tabbar-item>
-      <van-tabbar-item
-        icon="contact"
-        info="20"
-      >会员中心</van-tabbar-item>
+      <van-tabbar-item icon="records">分类</van-tabbar-item>
+      <van-tabbar-item icon="cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="contact">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -56,6 +53,7 @@ export default {
           this.$router.push({ name: 'Cart' })
           break;
         case 3:
+          this.$router.push({ name: 'User' })
           break;
       }
     }

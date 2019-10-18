@@ -7,16 +7,14 @@
       <van-row>
         <van-col span="6">
           <div id="leftNav">
-            <ul>
-              <li
+            <van-sidebar v-model="activeKey">
+              <van-sidebar-item
                 @click="clickCategory(index,item.ID)"
-                :class="{categoryActive:categoryIndex == index}"
                 v-for="(item,index) in category"
                 :key="index"
-              >
-                {{item.MALL_CATEGORY_NAME}}
-              </li>
-            </ul>
+                :title="item.MALL_CATEGORY_NAME"
+              />
+            </van-sidebar>
           </div>
         </van-col>
         <van-col span="18">
@@ -76,7 +74,7 @@
 import axios from 'axios'
 import url from '@/serviceAPI.config.js'
 import { Toast } from 'vant'
-import {toMoney} from '@/filter/moneyFilter.js'
+import { toMoney } from '@/filter/moneyFilter.js'
 export default {
   data() {
     return {
@@ -92,6 +90,7 @@ export default {
       goodList: [],     //商品信息
       categorySubId: '', //商品子分类ID
       errorImg: 'this.src="' + require('@/assets/images/errorimg.png') + '"',
+      activeKey: 0,
     }
   },
   created() {
@@ -106,11 +105,11 @@ export default {
     document.getElementById('list-div').style.height = winHeight - 150 + 'px'
 
   },
-  filters:{
-    moneyFilter(money){
-        return toMoney(money)
-    }  
-},
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money)
+    }
+  },
   methods: {
     getCategory() {
       axios({
@@ -118,7 +117,7 @@ export default {
         method: 'get',
       })
         .then(response => {
-          //console.log(response)
+          console.log(response)
           if (response.data.code == 200 && response.data.message) {
             this.category = response.data.message
             //console.log(this.category)
