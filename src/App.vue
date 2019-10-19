@@ -15,4 +15,5 @@ export default {
   background-color: #f8f8f8;
   box-sizing: border-box;
 }
+
 </style>

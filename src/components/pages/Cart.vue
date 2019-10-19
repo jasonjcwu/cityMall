@@ -1,51 +1,56 @@
 <template>
-  <div>
+  <div class="cart">
     <div class="navbar-div">
       <van-nav-bar title="购物车" />
     </div>
     <!--显示购物车中的商品-->
     <div class="cart-list">
-      <div
-        class="pang-row"
-        v-for="(item,index) in cartInfo"
-        :key="index"
+      <van-checkbox-group
+        class="card-goods"
+        v-model="checkedGoods"
       >
-        <div class="pang-img"><img
-            :src="item.image"
-            width="100%"
-          /></div>
-        <div class="pang-text">
-          <div class="pang-goods-name">{{item.Name}}</div>
+        <van-checkbox
+          class="card-goods__item"
+          v-for="(item,index) in cartInfo"
+          :key="index"
+          :name="item.goodsId"
+          v-model="checked"
+        >
+          <van-card
+            :title="item.Name"
+            :price="item.price | moneyFilter"
+            :thumb="item.image"
+            @click.stop
+          >
+            <van-stepper
+              slot="footer"
+              v-model="item.count"
+            />
+          </van-card>
 
-          <div class="pang-control">
-            <van-stepper v-model="item.count" />
-          </div>
-        </div>
-        <div class="pang-goods-price">
-          <div>
-            ￥{{item.price | moneyFilter}}
-          </div>
-          <div>
-            x{{item.count}}
-          </div>
-          <div class="allPrice">
-            ￥{{item.price*item.count | moneyFilter}}
-          </div>
-        </div>
+        </van-checkbox>
+      </van-checkbox-group>
+      <div class="card-title">
+        <van-button
+          size="small"
+          type="danger"
+          @click="clearCart"
+          plain
+        >清空购物车</van-button>
       </div>
-    </div>
-    <!--清空购物车-->
-    <div class="card-title">
-      <van-button
-        size="small"
-        type="danger"
-        @click="clearCart"
-        plain
-      >清空购物车</van-button>
-    </div>
-    <!--显示总金额-->
-    <div class="totalMoney">
-      商品总价：￥ {{totalMoney | moneyFilter}}
+      <van-submit-bar
+        :price="totalMoney"
+        :disabled="!checkedGoods.length"
+        :button-text="submitBarText"
+        @submit="onSubmit"
+      >
+        <span
+          @click="selectAll"
+          class="selectAll"
+        >
+          <van-checkbox v-model="checkedAll">{{checkedAllMsg}}</van-checkbox>
+        </span>
+      </van-submit-bar>
     </div>
 
   </div>
@@ -53,12 +58,23 @@
 </template>
 
 <script>
+import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast } from 'vant'
 import { toMoney } from '@/filter/moneyFilter.js'
 export default {
+  components: {
+    [Card.name]: Card,
+    [Checkbox.name]: Checkbox,
+    [SubmitBar.name]: SubmitBar,
+    [CheckboxGroup.name]: CheckboxGroup
+  },
   data() {
     return {
       cartInfo: [], // 购物车内的商品
       isEmpty: true, // 购物车是否为空
+      checkedGoods: [], //是否选中的物品
+      checked: true,
+      checkedAllMsg: '全选',
+      checkedAll: false,
     }
   },
   created() {
@@ -71,13 +87,14 @@ export default {
   },
   computed: {
     totalMoney() {
-      let allMoney = 0
-      this.cartInfo.forEach((item, index) => {
-        allMoney += item.price * item.count
-      })
-      localStorage.cartInfo = JSON.stringify(this.cartInfo)
-      return allMoney
-    }
+      return this.cartInfo.reduce((total, item) => {
+        return total + (this.checkedGoods.indexOf(item.goodsId) !== -1 ? item.price*item.count : 0)
+      }, 0)*100
+    },
+    submitBarText() {
+      const count = this.checkedGoods.length;
+      return '结算' + (count ? `(${count})` : '');
+    },
   },
   methods: {
     //得到购物车的商品
@@ -97,7 +114,20 @@ export default {
       localStorage.removeItem('cartInfo')
       this.cartInfo = []
     },
-
+    onSubmit() {
+      Toast('点击结算')
+    },
+    selectAll() {
+      if (!this.checkedAll) {
+        for (let i = 0; i < this.cartInfo.length; i++) {
+          this.checkedGoods.push(this.cartInfo[i].goodsId);
+        }
+        this.checkedAllMsg = '取消全选';
+      } else {
+        this.checkedGoods = [];
+        this.checkedAllMsg = '全选';
+      }
+    },
   }
 }
 
@@ -115,32 +145,57 @@ export default {
 .cart-list {
   background-color: #fff;
 }
-.pang-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  padding: 0.5rem;
-  font-size: 0.85rem;
-  border-bottom: 1px solid #e4e7ed;
-}
-.pang-img {
-  flex: 6;
-}
-.pang-text {
-  flex: 14;
-  padding-left: 10px;
-}
-.pang-control {
-  padding-top: 10px;
-}
-.pang-goods-price {
-  flex: 4;
-  text-align: right;
-}
 .totalMoney {
   text-align: right;
   background-color: #fff;
   border-bottom: 1px solid #e4e7ed;
   padding: 5px;
+}
+.cart {
+  margin-bottom: 120px;
+}
+
+.card-goods {
+  padding-top: 46px;
+  padding-bottom: 0;
+  background-color: #fff;
+}
+
+.card-goods__item {
+  position: relative;
+  background-color: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+}
+.card-goods__item >>> .van-checkbox__label {
+  width: 100%;
+  padding: 0 10px 0 15px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.card-goods__item >>> .van-checkbox__icon {
+  top: 50%;
+  left: 10px;
+  z-index: 1;
+  margin-top: -10px;
+  position: absolute;
+}
+.van-card__title {
+  font-size: 1.1rem;
+  line-height: 2.2rem;
+}
+.van-card__bottom {
+  position: absolute;
+  bottom: 0.5rem;
+}
+.van-card__price {
+  color: #f44;
+  font-weight: bold;
+}
+.van-submit-bar {
+  bottom: 50px;
+}
+.selectAll {
+  margin-left: 10px;
 }
 </style>

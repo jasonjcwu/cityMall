@@ -28,19 +28,21 @@
         title="全部订单"
         icon="records"
         is-link
-        to="/OrderList"
+       
       />
     </van-cell-group>
     <van-cell-group>
       <van-cell
-        title="我的积分"
+        title="登陆"
         icon="exchange"
         is-link
+        to="login"
       />
       <van-cell
-        title="我的优惠卷"
-        icon="gold-coin"
+        title="注册"
+        icon="user-o"
         is-link
+        to="register"
       />
       <van-cell
         title="我收到的礼物"
