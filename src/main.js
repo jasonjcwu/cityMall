@@ -35,32 +35,24 @@ import {
 } from 'vant'
 
 Vue.use(Button)
-    .use(Row)
-    .use(Col)
-    .use(Swipe)
-    .use(SwipeItem)
+    .use(Row).use(Col)
+    .use(Swipe).use(SwipeItem)
     .use(lazyload)
     .use(List)
     .use(Field)
     .use(NavBar)
-    .use(Tab)
-    .use(Tabs)
+    .use(Tab).use(Tabs)
     .use(PullRefresh)
     .use(Stepper)
-    .use(Tabbar)
-    .use(TabbarItem)
-    .use(GoodsAction)
-    .use(GoodsActionIcon)
-    .use(GoodsActionButton)
-    .use(Sidebar)
-    .use(SidebarItem)
+    .use(Tabbar).use(TabbarItem)
+    .use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton)
+    .use(Sidebar).use(SidebarItem)
     .use(Icon)
-    .use(Cell)
-    .use(CellGroup)
+    .use(Cell).use(CellGroup)
+
 
 Vue.config.productionTip = false
 
-// 设置axios
 Vue.prototype.$axios = Axios
     // Axios.defaults.baseURL = '/apis'
 Axios.defaults.headers.post['Content-Type'] = 'application/json'

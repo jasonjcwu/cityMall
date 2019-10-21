@@ -103,7 +103,6 @@ export default {
     let winHeight = document.documentElement.clientHeight
     document.getElementById("leftNav").style.height = winHeight - 46 + 'px'
     document.getElementById('list-div').style.height = winHeight - 150 + 'px'
-
   },
   filters: {
     moneyFilter(money) {

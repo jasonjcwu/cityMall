@@ -3,6 +3,14 @@
     <div class="navbar-div">
       <van-nav-bar title="购物车" />
     </div>
+
+        <div class="nogood"
+      v-if="!this.cartInfo.length">
+      <div>购物车空空的，快去购物吧~</div>
+      <van-button type="primary"
+        class="btn"
+        @click="goHome">去首页</van-button>
+    </div>
     <!--显示购物车中的商品-->
     <div class="cart-list">
       <van-checkbox-group

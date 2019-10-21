@@ -7,50 +7,61 @@ import Goods from '@/components/pages/Goods'
 import CategoryList from '@/components/pages/CategoryList'
 import Cart from '@/components/pages/Cart'
 import User from '@/components/pages/User'
-import Main from '@/components/pages/Main'
+import Tab from '@/components/pages/Tab'
 
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [{
-            path: '/main',
-            component: Main,
-            children: [{
-                    path: '/',
-                    name: 'ShoppingMall',
-                    component: ShoppingMall
-                },
-                {
-                    path: '/CategoryList',
-                    name: 'CategoryList',
-                    component: CategoryList
-                },
-                {
-                    path: '/Cart',
-                    name: 'Cart',
-                    component: Cart
-                },
-                {
-                    path: '/User',
-                    name: 'User',
-                    component: User
-                },
-            ]
+            path: '/',
+            name: 'ShoppingMall',
+            component: ShoppingMall
         },
+        {
+            path: '/CategoryList',
+            name: 'CategoryList',
+            component: CategoryList
+        },
+        {
+            path: '/Cart',
+            name: 'Cart',
+            component: Cart
+        },
+        {
+            path: '/User',
+            name: 'User',
+            component: User
+        },
+
         {
             path: '/register',
             name: 'Register',
-            component: Register
+            component: Register,
+            meta: {
+                fullScreen: true
+            }
         },
         {
             path: '/login',
             name: 'Login',
-            component: Login
+            component: Login,
+            meta: {
+                fullScreen: true
+            }
         },
         {
             path: '/Goods',
             name: 'Goods',
-            component: Goods
+            component: Goods,
+            meta: {
+                fullScreen: true
+            }
         },
+        {
+            path: '*',
+            name: 'ShoppingMall',
+            component: ShoppingMall,
+        }
     ]
 })
