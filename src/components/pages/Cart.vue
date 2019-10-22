@@ -9,7 +9,8 @@
       <div>购物车空空的，快去购物吧~</div>
       <van-button type="primary"
         class="btn"
-        @click="goHome">去首页</van-button>
+        to='/'
+        >去首页</van-button>
     </div>
     <!--显示购物车中的商品-->
     <div class="cart-list">
@@ -205,5 +206,11 @@ export default {
 }
 .selectAll {
   margin-left: 10px;
+}
+.nogood{
+  display: flex;
+  height:80vh;
+  align-items:center;
+  justify-content: center;
 }
 </style>
