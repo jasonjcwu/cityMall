@@ -16,22 +16,34 @@ export default new Router({
     routes: [{
             path: '/',
             name: 'ShoppingMall',
-            component: ShoppingMall
+            component: ShoppingMall,
+            meta: {
+                keepAlive:true
+            }
         },
         {
             path: '/CategoryList',
             name: 'CategoryList',
-            component: CategoryList
+            component: CategoryList,
+            meta: {
+                keepAlive:true
+            }
         },
         {
             path: '/Cart',
             name: 'Cart',
-            component: Cart
+            component: Cart,
+            meta: {
+                keepAlive:false
+            }
         },
         {
             path: '/User',
             name: 'User',
-            component: User
+            component: User,
+            meta: {
+                keepAlive:true
+            }
         },
 
         {
@@ -39,7 +51,8 @@ export default new Router({
             name: 'Register',
             component: Register,
             meta: {
-                fullScreen: true
+                fullScreen: true,
+                keepAlive:false
             }
         },
         {
@@ -47,7 +60,8 @@ export default new Router({
             name: 'Login',
             component: Login,
             meta: {
-                fullScreen: true
+                fullScreen: true,
+                keepAlive:false
             }
         },
         {
@@ -55,13 +69,17 @@ export default new Router({
             name: 'Goods',
             component: Goods,
             meta: {
-                fullScreen: true
+                fullScreen: true,
+                keepAlive:false //不需要被缓存的组件
             }
         },
         {
             path: '*',
             name: 'ShoppingMall',
             component: ShoppingMall,
+            meta: {
+                keepAlive:true
+            }
         }
     ]
 })

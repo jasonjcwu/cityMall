@@ -95,7 +95,7 @@ export default {
   },
   created() {
     this.getCategory()
-    console.log(this.category[0])
+    //console.log(this.category[0])
     //this.getCategorySubByCategoryId(this.category[0].ID)
 
   },
@@ -116,7 +116,7 @@ export default {
         method: 'get',
       })
         .then(response => {
-          console.log(response)
+          //console.log(response)
           if (response.data.code == 200 && response.data.message) {
             this.category = response.data.message
             //console.log(this.category)
@@ -185,15 +185,16 @@ export default {
         }
       })
         .then(response => {
-          console.log(response)
+          //console.log(response)
           if (response.data.code == 200 && response.data.message.length) {
             this.page++
             this.goodList = this.goodList.concat(response.data.message)
+            //console.log(this.goodList)
           } else {
             this.finished = true;
           }
           this.loading = false;
-          console.log(this.finished)
+          //console.log(this.finished)
         })
         .catch(error => {
           console.log(error)

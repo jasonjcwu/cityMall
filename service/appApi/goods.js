@@ -9,7 +9,7 @@ const fs = require('fs')
 
 router.get('/insertAllGoodsInfo', async(ctx) => {
 
-    fs.readFile('./newGoods.json', 'utf8', (err, data) => {
+    fs.readFile('./data_json/newGoods2.json', 'utf8', (err, data) => {
         data = JSON.parse(data)
         let saveCount = 0
         const Goods = mongoose.model('Goods')
@@ -100,19 +100,23 @@ router.post('/getCategorySubList', async(ctx) => {
 })
 
 router.post('/getGoodsListByCategorySubID', async(ctx) => {
-    try {
-        let categorySubId = ctx.request.body.categorySubId // 子类别ID
-        let page = ctx.request.body.page // 当前页数
-            //console.log(ctx.request.body)
-        let num = 10 // 每页显示数
-        let start = (page - 1) * num // 开始页面
-        const Goods = mongoose.model('Goods')
-        let result = await Goods.find({ SUB_ID: categorySubId }).skip(start).limit(num).exec()
-            //console.log(result)
-        ctx.body = { code: 200, message: result }
-    } catch (err) {
-        ctx.body = { code: 500, message: err }
-    }
+        try {
+            let categorySubId = ctx.request.body.categorySubId // 子类别ID
+            let page = ctx.request.body.page // 当前页数
+                //console.log(ctx.request.body)
+            let num = 10 // 每页显示数
+            let start = (page - 1) * num // 开始页面
+            const Goods = mongoose.model('Goods')
+            let result = await Goods.find({ SUB_ID: categorySubId }).skip(start).limit(num).exec()
+                //console.log(result)
+            ctx.body = { code: 200, message: result }
+        } catch (err) {
+            ctx.body = { code: 500, message: err }
+        }
 
-})
+    })
+    // router.get('/deleteErrorImage', async(ctx) => {
+    //     const Category = mongoose.model('Goods')
+    //     let result = await Category.remove()
+    // })
 module.exports = router;

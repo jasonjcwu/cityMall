@@ -26,7 +26,7 @@
     <div class="type-bar">
       <div v-for="(cate,index) in category" :key="index">
         <img v-lazy="cate.image" alt />
-        <span>{{cate.mallCategoryName}}</span>
+        <span>{{ }}</span>
       </div>
     </div>
     <!-- 广告 -->

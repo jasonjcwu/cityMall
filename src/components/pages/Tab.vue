@@ -21,7 +21,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to)
+      //console.log(to)
       switch (to.fullPath) {
         case '/':
           this.active = 0;
