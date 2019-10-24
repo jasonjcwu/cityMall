@@ -1,5 +1,5 @@
-const BASEURL = "http://localhost:3001/"
-const LOCALURL = "http://localhost:3000/"
+const BASEURL = "http://192.168.137.1:3001/"
+const LOCALURL = "http://192.168.137.1:3000/"
 const URL = {
     //商城首页
     getShoppingMallInfo: BASEURL + 'data',

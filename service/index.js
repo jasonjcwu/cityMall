@@ -25,7 +25,7 @@ let goods = require('./appApi/goods.js')
 let router = new Router()
 router.use('/user', user.routes())
 router.use('/goods', goods.routes())
-//路由中间件
+    //路由中间件
 app.use(router.routes())
 app.use(router.allowedMethods())
 
@@ -47,6 +47,6 @@ app.use(async(ctx) => {
     ctx.body = '<h1>hello koa</h1>'
 })
 
-app.listen(3000, () => {
+app.listen(3000, '0.0.0.0', () => {
     console.log('[Server] starting port 3000')
 })

@@ -102,8 +102,8 @@ export default {
     },
     checkForm() {
       let isOk = true
-      if (this.username.length < 5 || this.username.length > 20) {
-        this.usernameErrorMsg = "用户名不能小于5位或大于20位"
+      if (this.username.length < 3 || this.username.length > 20) {
+        this.usernameErrorMsg = "用户名有误"
         isOk = false
       } else {
         this.usernameErrorMsg = ""

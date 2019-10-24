@@ -74,12 +74,11 @@ export default {
     },
     checkForm() {
       let isOk = true;
-      if (this.username.length < 5 || this.username.length > 20) {
-        this.usernameErrorMsg = "用户名不能小于5位或大于20位";
+      if (this.username.length < 3 || this.username.length > 20) {
+        this.usernameErrorMsg = "用户名不能小于3位或大于20位";
         isOk = false;
       } else {
         console.log(this.username.length);
-
         this.usernameErrorMsg = "";
       }
       if (this.password.length < 6 || this.password.length > 20) {
