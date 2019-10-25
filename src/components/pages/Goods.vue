@@ -93,7 +93,7 @@ export default {
           if (response.data.code == 200 && response.data.message) {
             this.goodsInfo = response.data.message
           } else {
-            Toast('服务器错误，数据取得失败')
+            Toast('抱歉，此件商品数据消失')
           }
           //console.log(this.goodsInfo)
         })

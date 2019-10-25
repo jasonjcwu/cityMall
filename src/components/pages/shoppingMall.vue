@@ -26,7 +26,7 @@
     <div class="type-bar">
       <div v-for="(cate,index) in category"
       :key="index" 
-      @click="goCategory"
+      @click="goCategory(index)"
       >
         <img v-lazy="cate.image" alt />
         <span>{{ cate.mallCategoryName}}</span>
@@ -43,7 +43,7 @@
       <div class="recommend-body">
         <swiper :options="swiperOption">
           <swiper-slide v-for="(item,index) in recommendGoods" :key="index">
-            <div class="recommend-item">
+            <div class="recommend-item" @click="goGoodsPage(item.goodsId)">
               <img :src="item.image" width="80%" alt />
               <div>{{item.goodsName}}</div>
               <div>${{item.price | moneyFilter}}(${{item.mallPrice | moneyFilter}})</div>
@@ -51,7 +51,6 @@
           </swiper-slide>
         </swiper>
       </div>
-
     </div>
     <!-- 楼层 -->
     <div v-for="(item,index) in floorName" :key="index">
@@ -151,9 +150,13 @@ export default {
       })
   },
   methods:{
-goCategory(){
-  this.$router.push({name:'CategoryList',query:{mallCategoryId:this.category.mallCategoryId}})
-}
+goCategory(index){
+  //console.log(index)
+  this.$router.push({name:'CategoryList',params:{mallCategoryId:index}})
+},
+    goGoodsPage(goodsId){
+      this.$router.push({name:'Goods',query:{goodsId:goodsId}})
+    }
   }
 };
 </script>
@@ -161,7 +164,6 @@ goCategory(){
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .search-bar {
-  height: 3rem;
   background: #e5017b;
   line-height: 3rem;
 }

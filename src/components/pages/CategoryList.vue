@@ -94,9 +94,7 @@ export default {
     }
   },
   created() {
-    //let firstCategoryIndex = this.$route.query.mallCategoryId
     this.getCategory()
-    //this.clickCategory(firstCategoryIndex,firstCategoryIndex+1)
     //console.log(this.category[0])
     //this.getCategorySubByCategoryId(this.category[0].ID)
 
@@ -106,7 +104,11 @@ export default {
     document.getElementById("leftNav").style.height = winHeight - 46 + 'px'
     document.getElementById('list-div').style.height = winHeight - 150 + 'px'
   },
-
+  activated() {
+    let firstCategoryIndex = this.$route.params.mallCategoryId
+    //console.log(firstCategoryIndex)
+    this.clickCategory(firstCategoryIndex, firstCategoryIndex + 1)
+  },
   filters: {
     moneyFilter(money) {
       return toMoney(money)
@@ -133,7 +135,8 @@ export default {
         })
     },
     clickCategory(index, categoryId) {
-
+      console.log(index)
+      this.activeKey = index
       this.categoryIndex = index
       this.page = 1
       this.finished = false

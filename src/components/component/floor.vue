@@ -3,9 +3,19 @@
     <div class="floor">
       <div class="floor-title">{{floorTitle}}</div>
       <div class="floor-rule">
-        <img :src="floorData0.image" width="100%" />
-        <div v-for="(item, index) in floorData.slice(1)" :key="index">
-          <img :src="item.image" width="100%" />
+        <img 
+          @click="goGoodsPage(floorData0.goodsId)"
+          :src="floorData0.image"
+          width="100%"
+        />
+        <div
+          v-for="(item, index) in floorData.slice(1)"
+          :key="index"
+        >
+          <img @click="goGoodsPage(item.goodsId)"
+            :src="item.image"
+            width="100%"
+          />
         </div>
       </div>
     </div>
@@ -21,6 +31,12 @@ export default {
   },
   created() {
     this.floorData0 = this.floorData[0];
+    console.log(this.floorData)
+  },
+  methods:{
+    goGoodsPage(goodsId){
+      this.$router.push({name:'Goods',query:{goodsId:goodsId}})
+    }
   }
 };
 </script>
@@ -45,7 +61,8 @@ export default {
   width: 11.71875rem;
   border-bottom: 1px solid #ddd;
 }
- .floor-rule>div:nth-child(odd) {
+.floor-rule > div:nth-child(odd) {
   border-left: 1px solid #ddd;
-} 
+}
+
 </style>
