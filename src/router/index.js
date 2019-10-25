@@ -18,7 +18,7 @@ export default new Router({
             name: 'ShoppingMall',
             component: ShoppingMall,
             meta: {
-                keepAlive:true
+                keepAlive: true
             }
         },
         {
@@ -26,7 +26,8 @@ export default new Router({
             name: 'CategoryList',
             component: CategoryList,
             meta: {
-                keepAlive:true
+                keepAlive: true,
+                isBack: false,
             }
         },
         {
@@ -34,7 +35,7 @@ export default new Router({
             name: 'Cart',
             component: Cart,
             meta: {
-                keepAlive:false
+                keepAlive: false
             }
         },
         {
@@ -42,7 +43,7 @@ export default new Router({
             name: 'User',
             component: User,
             meta: {
-                keepAlive:true
+                keepAlive: true
             }
         },
 
@@ -52,7 +53,7 @@ export default new Router({
             component: Register,
             meta: {
                 fullScreen: true,
-                keepAlive:false
+                keepAlive: false
             }
         },
         {
@@ -61,7 +62,7 @@ export default new Router({
             component: Login,
             meta: {
                 fullScreen: true,
-                keepAlive:false
+                keepAlive: false
             }
         },
         {
@@ -70,7 +71,7 @@ export default new Router({
             component: Goods,
             meta: {
                 fullScreen: true,
-                keepAlive:false //不需要被缓存的组件
+                keepAlive: false //不需要被缓存的组件
             }
         },
         {
@@ -78,7 +79,7 @@ export default new Router({
             name: 'ShoppingMall',
             component: ShoppingMall,
             meta: {
-                keepAlive:true
+                keepAlive: true
             }
         }
     ]

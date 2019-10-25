@@ -24,9 +24,12 @@
     </div>
     <!-- 分类 -->
     <div class="type-bar">
-      <div v-for="(cate,index) in category" :key="index">
+      <div v-for="(cate,index) in category"
+      :key="index" 
+      @click="goCategory"
+      >
         <img v-lazy="cate.image" alt />
-        <span>{{ }}</span>
+        <span>{{ cate.mallCategoryName}}</span>
       </div>
     </div>
     <!-- 广告 -->
@@ -146,7 +149,11 @@ export default {
       .catch(error => {
         console.log(error)
       })
-
+  },
+  methods:{
+goCategory(){
+  this.$router.push({name:'CategoryList',query:{mallCategoryId:this.category.mallCategoryId}})
+}
   }
 };
 </script>

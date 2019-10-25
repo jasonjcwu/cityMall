@@ -7,7 +7,7 @@
       />
     </div>
     <div class="goods-name">{{goods.name}}</div>
-    <div class="goods-price">￥{{goods.price | moneyFilter }}</div>
+    <div class="goods-price">?{{goods.price | moneyFilter }}</div>
   </div>
 </template>
 <script>
