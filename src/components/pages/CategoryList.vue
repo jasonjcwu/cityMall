@@ -105,7 +105,7 @@ export default {
     document.getElementById('list-div').style.height = winHeight - 150 + 'px'
   },
   activated() {
-    let firstCategoryIndex = this.$route.params.mallCategoryId
+    let firstCategoryIndex = this.$route.params.mallCategoryId || 0
     //console.log(firstCategoryIndex)
     this.clickCategory(firstCategoryIndex, firstCategoryIndex + 1)
   },
