@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>vue-shopping</title><link href=/static/css/app.1797036d49cd391312ffd657a36aeecb.css rel=stylesheet></head><body><div id=app></div><script>//得到手机屏幕的宽度
+        let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        //得到html的Dom元素
+        let htmlDom = document.getElementsByTagName('html')[0];
+        //设置根元素字体大小,iphone678屏幕宽度375px标准375/16
+        if (htmlWidth > 750) {
+            htmlWidth = 750
+        }
+        htmlDom.style.fontSize = htmlWidth / 23.4375 + 'px';
+        //console.log(htmlDom.style.fontSize)</script><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.baf6db62fb4df2698522.js></script><script type=text/javascript src=/static/js/app.1b9d6a0c2f5e350116a4.js></script></body></html>

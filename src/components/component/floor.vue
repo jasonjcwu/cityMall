@@ -58,7 +58,7 @@ export default {
 .floor-rule div {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  width: 11.71875rem;
+  width: 50vw;
   border-bottom: 1px solid #ddd;
 }
 .floor-rule > div:nth-child(odd) {

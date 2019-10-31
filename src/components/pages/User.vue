@@ -28,7 +28,6 @@
         title="全部订单"
         icon="records"
         is-link
-       
       />
     </van-cell-group>
     <van-cell-group>
@@ -56,6 +55,9 @@
 <script>
 export default {
   name: 'User',
+  created() {
+    // console.log(localStorage.userInfo)
+  },
   methods: {}
 };
 </script>
@@ -73,12 +75,11 @@ export default {
   padding: 15px 0;
   background-color: #fff;
 }
-  .van-icon {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 24px;
-  }
-
+.van-icon {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 24px;
+}
 
 .user-group {
   margin-bottom: 0.3rem;

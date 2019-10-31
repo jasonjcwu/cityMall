@@ -5,6 +5,11 @@ const mongoose = require('mongoose')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const Router = require('koa-router')
+const path = require('path')
+const staticFiles = require('koa-static')
+
+// 指定 dist目录为静态资源目录，用来存放 js css images 等
+app.use(staticFiles(path.resolve(__dirname, "./dist")))
 
 app.use(bodyParser())
 app.use(cors())
@@ -33,20 +38,12 @@ app.use(router.allowedMethods())
 (async() => {
     await connect()
     initSchemas()
-        // const User = mongoose.model('User')
-        // let oneUser = new User({ userName: 'jason2', passWord: '123456' })
-        // oneUser.save().then(() => {
-        //     console.log('插入成功')
-        // })
-        // let users = await User.findOne({}).exec()
-        // console.log('------------------')
-        // console.log(users)
-        // console.log('------------------')
-})()
-app.use(async(ctx) => {
-    ctx.body = '<h1>hello koa</h1>'
-})
 
-app.listen(3000, '0.0.0.0', () => {
+})()
+// app.use(async(ctx) => {
+//     ctx.body = '<h1>hello koa</h1>'
+// })
+
+app.listen(3000, () => {
     console.log('[Server] starting port 3000')
 })

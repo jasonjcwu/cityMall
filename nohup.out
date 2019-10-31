@@ -1,0 +1,32 @@
+
+  \{^_^}/ hi!
+
+  Loading goods.json
+  Done
+
+  Resources
+  http://localhost:3001/data
+
+  Home
+  http://localhost:3001
+
+  Type s + enter at any time to create a snapshot of the database
+  Watching...
+
+  Error, can't read from stdin
+  Creating a snapshot from the CLI won't be possible
+[0mGET /jsonserver [33m404 [0m4.484 ms - 2[0m
+[0mGET /jsonserver/data [33m404 [0m1.582 ms - 2[0m
+[0mGET /jsonserver/data [33m404 [0m1.647 ms - 2[0m
+[0mGET /jsonserver [33m404 [0m1.485 ms - 2[0m
+[0mGET /jsonserver1 [33m404 [0m1.494 ms - 2[0m
+[0mGET /jsonserver [33m404 [0m0.442 ms - 2[0m
+[0mGET /jsonserver [33m404 [0m1.472 ms - 2[0m
+[0mGET /jsonserver [33m404 [0m1.553 ms - 2[0m
+[0mGET /jsonserver/ [33m404 [0m1.538 ms - 2[0m
+[0mGET /jsonserver/data [33m404 [0m1.858 ms - 2[0m
+[0mGET /jsonserver [33m404 [0m0.398 ms - 2[0m
+[0mGET /jsonserver/data [33m404 [0m1.734 ms - 2[0m
+[0mGET /jsonserver/ [33m404 [0m1.460 ms - 2[0m
+[0mGET /jsonserver/ [33m404 [0m1.475 ms - 2[0m
+[0mGET /data [32m200 [0m4.264 ms - -[0m

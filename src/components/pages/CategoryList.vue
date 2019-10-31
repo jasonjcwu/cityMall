@@ -227,22 +227,9 @@ export default {
 </script>
 
 <style scoped>
-#leftNav ul li {
-  line-height: 2rem;
-  border-bottom: 1px solid #e4e7ed;
-  padding: 3px;
-  font-size: 0.8rem;
-  text-align: center;
+.van-sidebar {
+    width: 100%;
 }
-.categoryActive {
-  background-color: #fff;
-}
-/* .list-item {
-  text-align: center;
-  line-height: 80px;
-  border-bottom: 1px solid #f0f0f0;
-  background-color: #fff;
-} */
 #list-div {
   overflow: scroll;
 }
@@ -253,9 +240,6 @@ export default {
   border-bottom: 1px solid #f0f0f0;
   background-color: #fff;
   padding: 5px;
-}
-#list-div {
-  overflow: scroll;
 }
 .list-item-img {
   flex: 8;
